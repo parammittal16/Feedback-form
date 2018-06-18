@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>MAIL TO PARAM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+<link rel="icon" href="./icon.png" type="image/png" sizes="16x16">
+<style>
+html{
+background-color: #d5edf8;
+box-sizing: border-box;
+font-family: 'Montserrat', sans-serif;
+font-weight: 300;
+font-size: 62.5%;
+}
+h1 {
+font-size: 4rem;
+color: #3b6c80;
+}
+h1, form{
+text-align: center;
+}
+form {
+color:#fff;
+display: block;
+margin: 0 auto;
+max-width: 40rem;
+max-height:40rem;
+background-color: #3b6c80;
+padding: 50px 2rem 50px 2rem;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #9e9e9e;
+    opacity: 1; /* Firefox */
+}
+input {
+	margin: 10px;
+	font-size: 2rem;
+	color: #fff;
+	border-radius: 0;
+	background-color: transparent;
+	border-color: #ccc;
+   	border-width: 0 0 2px 0;
+   	border-style: none none solid none;
+   	box-shadow: none;
+}
+input:focus {
+	outline: none;
+
+}
+.btn{
+	cursor: pointer;
+	font-size:
+}
+img{
+display: block;
+margin: 0 auto;
+width: 20rem;
+}
+</style>
+</head>
+<body>
+<h1>MAIL TO PARAM</h1>
+
+<form class="sucess-none" id="newContact">
+<input type="text" value="" name="FNAME" class="form-control required name" id="name" placeholder="Name:">
+<br>
+<input type="email" value="" name="EMAIL" class="form-control required email" id="email" placeholder="Email:">
+<br>
+<input type="submit" class="btn" value="Submit" name="SEND" id="submitContact">
+</form>
+<br>
+<br>
+<div class="success" style="display: none;">Mail Sent</div>
+<img src="./mail.gif"></img>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script>
+$(document).ready(function() {
+    if ($('#newContact').length > 0 ) {
+        contactScript('forcontact');
+    }
+});
+
+//firebase
+function contactScript(value) {
+    var a = {
+    apiKey: "AIzaSyDG1xDIgZV0_kDaZnPdj7fjv6GMFm5avWY",
+    authDomain: "parammail16.firebaseapp.com",
+    databaseURL: "https://parammail16.firebaseio.com",
+    projectId: "parammail16",
+    storageBucket: "parammail16.appspot.com",
+    messagingSenderId: "847497571346"
+  };
+  firebase.initializeApp(a);
+    var b = firebase.database().ref("messages");
+        $("#newContact").submit(function(a) { $(this), console.log("Submit to Firebase");
+        var c = $("#name").val(),
+            d = $("#email").val(),
+            f = { name: c, email: d};
+        return b.push(f).then(function(a) { 
+            $(".sucess").css("display", "block"), 
+            $(".sucess-none").css("display", "none") }), !1 })   
+}
+</script>
+</body>
+</html>
